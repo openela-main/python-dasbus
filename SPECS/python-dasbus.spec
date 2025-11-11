@@ -1,8 +1,8 @@
 %global srcname dasbus
 
 Name:           python-%{srcname}
-Version:        1.4
-Release:        5%{?dist}
+Version:        1.5
+Release:        1%{?dist}
 Summary:        DBus library in Python 3
 
 License:        LGPLv2+
@@ -43,6 +43,9 @@ Requires:       python3-gobject-base
 %{python3_sitelib}/%{srcname}/
 
 %changelog
+* Mon Jul 07 2025 Katerina Koukiou <k.koukiou@gmail.com> - 1.5-1
+- Update to version 1.5
+
 * Tue Aug 10 2021 Mohan Boddu <mboddu@redhat.com> - 1.4-5
 - Rebuilt for IMA sigs, glibc 2.34, aarch64 flags
   Related: rhbz#1991688
