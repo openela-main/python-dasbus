@@ -1,13 +1,18 @@
 %global srcname dasbus
 
 Name:           python-%{srcname}
-Version:        1.5
+Version:        1.7
 Release:        1%{?dist}
 Summary:        DBus library in Python 3
 
-License:        LGPLv2+
+License:        LGPL-2.1-or-later
 URL:            https://pypi.python.org/pypi/dasbus
+%if %{defined suse_version}
+Source0:        %{srcname}-%{version}.tar.gz
+Group:          Development/Libraries/Python
+%else
 Source0:        %{pypi_source}
+%endif
 
 BuildArch:      noarch
 
@@ -22,7 +27,13 @@ to use and extend.}
 Summary:        %{summary}
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
+%if %{defined suse_version}
+BuildRequires:  fdupes
+BuildRequires:  python-rpm-macros
+Requires:       python3-gobject
+%else
 Requires:       python3-gobject-base
+%endif
 %{?python_provide:%python_provide python3-%{srcname}}
 
 %description -n python3-%{srcname} %{_description}
@@ -35,6 +46,9 @@ Requires:       python3-gobject-base
 
 %install
 %py3_install
+%if %{defined suse_version}
+%python_expand %fdupes %{buildroot}%{python3_sitelib}
+%endif
 
 %files -n python3-%{srcname}
 %license LICENSE
@@ -43,6 +57,9 @@ Requires:       python3-gobject-base
 %{python3_sitelib}/%{srcname}/
 
 %changelog
+* Fri Sep 12 2025 Katerina Koukiou <k.koukiou@gmail.com> - 1.7-1
+- Update to version 1.7
+
 * Mon Jul 07 2025 Katerina Koukiou <k.koukiou@gmail.com> - 1.5-1
 - Update to version 1.5
 
